@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Okky Hendra Muda | Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+ <script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          brand: '#0aa2b5'
+        }
+      }
+    }
+  }
+</script>
+<style>
+
+    #cursor-effect {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+    }
+  </style>
+<style>
+<style>
+.section-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+/* GAMBAR */
+.section-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover; /* ? FULL AREA */
+
+  opacity: 0.15; /* ?? lebih jelas dari sebelumnya */
+  filter: blur(1px); /* lebih tajam */
+
+  z-index: 0;
+}
+
+/* OVERLAY biar tetap readable */
+.section-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    #0f2a36 20%,
+    rgba(15,42,54,0.6) 50%,
+    transparent
+  );
+  z-index: 0;
+}
+
+.section-bg > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* EXPERIENCE */
+.bg-experience::before {
+  background-image: url('https://image2url.com/r2/default/images/1774885102009-1e906a3a-59ba-4ff4-8998-a033710d55ee.jpeg');
+}
+
+</style>
+</style>
+<style>
+@keyframes gradientMove {
+  0% { background-position: 0% }
+  100% { background-position: 200% }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradientMove 3s linear infinite;
+}
+</style>
+
+</head>
+<body class="bg-[#0b1c26] text-white font-sans scroll-smooth">
+  
+<canvas id="cursor-effect"></canvas>
+<script>
+const canvas = document.getElementById("cursor-effect");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+window.addEventListener("resize", () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+
+document.addEventListener("mousemove", (e) => {
+  for (let i = 0; i < 3; i++) {
+    particles.push({
+      x: e.clientX,
+      y: e.clientY,
+      size: Math.random() * 4 + 1,
+      speedX: (Math.random() - 0.5) * 2,
+      speedY: (Math.random() - 0.5) * 2,
+      life: 100
+    });
+  }
+});
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  particles.forEach((p, i) => {
+    p.x += p.speedX;
+    p.y += p.speedY;
+    p.life--;
+
+  ctx.beginPath();
+ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+
+const colors = [
+  [139,92,246],
+  [255,40,0],    // merah Ferrari
+  [255,165,0]
+];
+
+const color = colors[Math.floor(Math.random() * colors.length)];
+
+ctx.fillStyle = `rgba(${color[0]}, ${color[1]}, ${color[2]}, ${p.life / 100})`;
+
+ctx.shadowColor = "rgba(255,255,255,0.8)";
+ctx.shadowBlur = 15;
+
+ctx.fill();
+    if (p.life <= 0) particles.splice(i, 1);
+  });
+
+  requestAnimationFrame(animate);
+}
+
+animate();
+
+</script>
+
+<header class="fixed w-full z-50 bg-[#0b1c26]/90 backdrop-blur px-5 py-4 flex justify-between items-center">
+
+  <h1 class="font-bold text-lg text-white">Kos RumahOxygen Wonosobo</h1>
+
+  <!-- BUTTON MENU MOBILE -->
+  <button id="menu-btn" class="md:hidden text-white text-2xl">
+    <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path d="M4 6h16M4 12h16M4 18h16"/>
+    </svg>
+  </button>
+
+  <nav id="menu"
+     class="hidden md:flex gap-10 text-sm text-gray-300 
+            absolute md:static top-full left-0 w-full md:w-auto 
+            bg-[#0b1c26] md:bg-transparent 
+            flex-col md:flex-row p-6 md:p-0 
+            z-40
+            transition-all duration-300">
+
+    <a href="#" class="text-lg hover:text-blue-400">Home   |</a>
+    <a href="#about" class="text-lg hover:text-blue-400">About   |</a>
+    <a href="#resume" class="text-lg hover:text-blue-400">Facility   |</a>
+    <a href="#product" class="text-lg hover:text-blue-400">Product   |</a>
+    <a href="#testimony" class="text-lg hover:text-blue-400">Testimony   |</a>
+    <a href="#contact" class="text-lg hover:text-blue-400">Contact</a>
+
+  </nav>
+
+</header>
+<!-- HERO -->
+<section class="min-h-screen flex items-center pt-20">
+  <div class="max-w-6xl mx-auto px-10 w-full">
+    
+    <div class="grid md:grid-cols-2 gap-10 items-center">
+      
+      <!-- TEXT -->
+      <div data-aos="fade-right">
+        <h1 class="text-5xl md:text-6xl font-bold leading-tight mb-4">
+          welcome to  <br>
+         <span class="font-bold bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent
+          [ text-shadow:
+          0_0_10px_rgba(10,162,181,0.9),
+          0_0_20px_rgba(10,162,181,0.7),
+          0_0_40px_rgba(10,162,181,0.5)
+          ]">
+            Kos RumahOxygen
+          </span>
+        </h1>
+
+        <p class="text-xl text-gray-300 mb-4">
+                Kos Deluxe Harga Terjangkau    
+        </p>
+
+        <label class="text-gray-400 italic mb-8 max-w-lg">
+          <span class="flex items-center gap-2 text-blue-400 mt-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>Amanah
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>Halal 
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>Aman
+          </span>
+        </label>
+        <div class="flex gap-8 mt-10 text-center"> 
+          <div> 
+                <p class="text-2xl font-bold text-blue-400">3+</p>
+                <p class="text-sm text-gray-400">Years Experience</p> 
+          </div> 
+          <div> 
+                <p class="text-2xl font-bold text-blue-400">12K+</p> 
+                <p class="text-sm text-gray-400">Viewers</p> 
+          </div> 
+          <div> 
+                <p class="text-2xl font-bold text-blue-400">2.5K+</p> 
+                <p class="text-sm text-gray-400">Likes on Instagram</p> 
+          </div> 
+        </div>
+        <br>
+        <div class="flex gap-4">
+          <a href="#portfolio" class="bg-gradient-to-r from-purple-500 via-red-500 to-brand text-white px-6 py-3 rounded-full font-semibold hover:scale-105 transition">View Product</a>
+          <a 
+            href="https://wa.me/6281211518369?text=Halo%20saya%20tertarik%20menyewa%20kamar%20di%20Kos%20RumahOxygen"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="bg-brand text-white px-6 py-3 rounded-full font-semibold hover:scale-105 transition"
+          >
+            Contact by WA
+          </a>
+          </div>
+      </div>
+
+      <!-- IMAGE -->
+      <div class="flex justify-center" data-aos="fade-left">
+        <img src="https://image2url.com/r2/default/images/1774882869942-1a4a1671-872f-447c-8a7e-9255d6569c96.jpeg" 
+         class="w-[350px] h-[350px] object-cover rounded-xl border border-gray-700 
+         shadow-[0_15px_30px_rgba(0,0,0,0.35),0_0_25px_rgba(0,150,255,0.5)] 
+         transition-all duration-300 hover:-translate-y-2 
+         hover:shadow-[0_25px_40px_rgba(0,0,0,0.5),0_0_40px_rgba(0,150,255,0.8)]"/>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="py-20 px-10 max-w-6xl mx-auto" data-aos="fade-up">
+  <h2 class="text-3xl font-bold mb-6">About Us</h2>
+  <p class="text-gray-300 leading-relaxed">
+RumahOxygen bukan sekadar tempat tinggal, tapi tempat untuk beristirahat dengan nyaman setelah hari yang panjang.
+Cocok untuk mahasiswa maupun pekerja yang mengutamakan kenyamanan, keamanan, dan lingkungan yang positif.  </p>
+<br><h2 class="text-3xl font-bold mb-10"style="text-shadow: 0 0 10px #22d3ee,
+                       0 0 20px #22d3ee,
+                       0 0 40px #22d3ee;">Kos RumahOxygen</h2>
+
+  <div class="grid md:grid-cols-2 gap-10 items-center">
+
+    <!-- IMAGE -->
+    <div class="relative w-full max-w-xl mx-auto overflow-hidden rounded-xl shadow-lg">
+
+  <!-- SLIDES -->
+  <div id="slider" class="flex transition-transform duration-500">
+    
+    <img src="https://image2url.com/r2/default/images/1774889917333-e98b6f37-2eaa-476e-afba-f8cea775b05b.jpg" class="w-full flex-shrink-0">
+    <img src="https://image2url.com/r2/default/images/1774897161940-71f3c144-6c39-4fd2-b348-6748ad9e8df5.png">
+    <img src="https://image2url.com/r2/default/images/1774900142992-334eff0c-58a3-417b-9fff-ec875611288f.jpg">
+    <img src="https://image2url.com/r2/default/images/1774899463624-db62fc28-7b0d-4fba-9750-d48049065d04.jpg">
+    <img src="https://image2url.com/r2/default/images/1774902926925-d723d146-7af6-4486-8e89-c41bca131e37.jpg">
+
+  </div>
+  <div class="flex justify-center mt-5 gap-4">
+  <span class="w-2 h-2 bg-white/50 rounded-full"></span>
+  <span class="w-2 h-2 bg-white/50 rounded-full"></span>
+  <span class="w-2 h-2 bg-white/50 rounded-full"></span>
+  <span class="w-2 h-2 bg-white/50 rounded-full"></span>
+  <span class="w-2 h-2 bg-white/50 rounded-full"></span>
+  </div>
+
+  <!-- BUTTON LEFT -->
+  <button onclick="prevSlide()" 
+    class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 px-3 py-1 rounded-full">
+    < prev
+  </button>
+
+  <!-- BUTTON RIGHT -->
+  <button onclick="nextSlide()" 
+    class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 px-3 py-1 rounded-full">
+    next >
+  </button>
+
+</div>
+
+
+    <!-- CONTENT -->
+    <div>
+     <h3 class="text-2xl font-semibold mb-4 text-blue-300"
+       style="text-shadow: 0 0 10px #22d3ee,
+                       0 0 20px #22d3ee,
+                       0 0 40px #22d3ee;">
+      Hunian Nyaman di : > > > Wonosobo, Central Java, ID
+    </h3>
+            <p class="text-gray-300 mb-4 leading-relaxed">
+        Kos RumahOxygen hadir sebagai solusi tempat tinggal yang nyaman, bersih, dan strategis untuk mahasiswa maupun pekerja. Dengan suasana tenang dan fasilitas lengkap, kami menghadirkan pengalaman tinggal yang lebih dari sekadar kos.
+      </p>
+
+      <ul class="text-gray-400 text-sm space-y-2 mb-6">
+        
+      </ul>
+
+      <p class="text-gray-400 italic">
+        "Tempat terbaik untuk beristirahat, bekerja, dan menikmati suasana sejuk khas Wonosobo."
+      </p>
+    </div>
+
+  </div>
+</section>
+<section id="resume" class="py-20 bg-[#0f2a36]" data-aos="fade-up">
+  
+  <div class="max-w-6xl mx-auto px-10 ">
+
+    <!-- SUMMARY -->
+    <div class="mb-12 relative z-10">
+      <h2 class="text-3xl font-semibold mb-6">Keunggulan / Features</h2>
+
+      <p class="text-white-400 mb-4">
+      Kos RumahOxygen ? Solusi Tempat Tinggal Ideal untuk Mahasiswa & Pekerja dengan Harga Bersahabat      </p>
+
+      <p class="text-blue-400 italic">
+      Cari kos yang nyaman, aman, dan strategis di Wonosobo?
+      RumahOxygen hadir untuk kamu yang butuh tempat tinggal dengan suasana tenang, fasilitas lengkap, dan harga yang tetap ramah di kantong.      </p>
+    </div>
+
+    <!-- EXPERIENCE -->
+    <div class="mb-12 section-bg bg-experience">
+      <h3 class="text-2xl font-semibold mb-6 text-blue-400">Experience</h3>
+
+      <div class="space-y-6">
+        <div class="border-l-2 border-blue-400 pl-6">
+          <h4 class="font-semibold">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M12 21s6-5 6-10a6 6 0 10-12 0c0 5 6 10 6 10z"/>
+                <circle cx="12" cy="11" r="2"/>
+            </svg>
+             1. Lokasi Strategis</h4>
+           <p class="text-gray-300 text-sm mt-2">
+          Dekat kampus, pusat kota, dan fasilitas umum ? memudahkan aktivitas harianmu.          </p>
+          </p>
+        </div>
+        <div class="border-l-2 border-blue-400 pl-6">
+          <h4 class="font-semibold"> 
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M12 2C8 7 6 10 6 14a6 6 0 0012 0c0-4-2-7-6-12z"/>
+            </svg>
+            2. Harga Bersaing
+            </h4>
+          <p class="text-gray-300 text-sm mt-2">
+          Nikmati fasilitas lengkap tanpa harus khawatir soal biaya.          </p>
+        </div>
+        <div class="border-l-2 border-blue-400 pl-6">
+          <h4 class="font-semibold">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M12 17l-5 3 1-5-4-4 5-.5L12 6l3 4.5 5 .5-4 4 1 5z"/>
+            </svg>
+            3. Fasilitas Lengkap
+            </h4>
+          <p class="text-gray-300 text-sm mt-2">
+            <li> Kamar luas nyaman+ bed 180x200</li>
+            <li> Kamar mandi bersih + water heater</li>
+            <li> Meja &Kursi Kerja</li>
+            <li> Rak 5 Susun</li>
+            <li> Alat Ibadah</li>
+            <li> Parkir tersedia (motor / mobil)</li>
+            <li> Area bersama yang nyaman</li>          </p>
+        </div>
+        <div class="border-l-2 border-blue-400 pl-6">
+          <h4 class="font-semibold"><svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M3 10h18v7H3z"/>
+            <path d="M7 10V7h4v3"/>
+          </svg>
+          4. Lingkungan Aman & Nyaman 
+          </h4>
+          <p class="text-gray-300 text-sm mt-2">
+          Suasana tenang dan keamanan terjaga untuk istirahat yang maksimal.          </p>
+        </div>
+        
+      </div>
+    </div>
+
+
+
+  </div>
+</section>
+<!-- PROJECTS / ACHIEVEMENTS -->
+<section id="portfolio" class="py-20 px-10 max-w-6xl mx-auto" data-aos="fade-up">
+  <h2 class="text-3xl font-bold mb-10">Product</h2>
+
+  <div class="grid md:grid-cols-3 gap-6">
+
+    <div class="bg-[#132d3a] rounded-xl overflow-hidden hover:scale-105 transition">
+
+      <div class="relative bg-[#132d3a] rounded-xl overflow-hidden 
+              hover:scale-110 transition duration-300">
+        <img 
+          src="https://image2url.com/r2/default/images/1774899463624-db62fc28-7b0d-4fba-9750-d48049065d04.jpg" 
+          class="w-full h-48 object-cover"
+        >
+        <div class="absolute inset-0 bg-black/20"></div>
+    
+        <h3 class="absolute bottom-3 left-4 text-white font-semibold">
+        <a href="https://wa.me/6281211518369?text=Saya%20ingin%20booking%20Kamar%20Type%20A%20di%20Kos%20RumahOxygen%20Wonosobo"
+           target="_blank"
+           class="mt-4 inline-flex items-center gap-4 p-[1px] rounded-lg bg-gradient-to-r from-purple-500 via-red-500 to-brand
+                  text-white text-sm px-4 py-2 rounded-lg transition animate-gradient hover:bg-green">
+        
+          <!-- ICON WHATSAPP -->
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M20 3.5A11 11 0 005.4 19.2L4 23l3.9-1.3A11 11 0 1020 3.5zm-8 16a8.5 8.5 0 01-4.3-1.2l-.3-.2-2.3.8.8-2.2-.2-.3A8.5 8.5 0 1112 19.5zm4.7-6.3c-.3-.2-1.7-.8-2-.9s-.5-.2-.7.2-.8.9-1 1.1-.4.2-.7 0a7 7 0 01-2-1.2 7.6 7.6 0 01-1.4-1.8c-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.4.3-.6 0-.2 0-.5-.1-.7-.1-.2-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.5s-1.2 1.1-1.2 2.7 1.2 3.1 1.4 3.3c.2.2 2.4 3.7 5.9 5.2.8.3 1.4.5 1.9.6.8.1 1.5.1 2.1.1.6 0 1.7-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.1-.3-.2-.6-.4z"/>
+          </svg>
+        
+          Booking Kamar Type A
+        </a>
+        </h3>
+      </div>
+    
+      <div class="p-6">
+        <p class="text-gray-400 text-sm mb-2">
+Room 25 m persegi, AC, Workbench, Tray, bed 180x200 (King size), toilet with sink, water heater, and shower, *+additional work room private.      </p>
+        </p>
+    
+        <p class="text-violet-500 text-xl"> Get Promo discount 25% off</p>
+        <p class="text-sm">
+          <span class="line-through text-red-500">Rp. 2.300.000</span>
+          <span class="text-white-500 ml-2 font-semibold">Rp. 1.725.000</span>
+        </p>
+        </div>
+    
+    </div>
+    
+    <div class="bg-[#132d3a] rounded-xl overflow-hidden hover:scale-105 transition">
+
+      <div class="relative bg-[#132d3a] rounded-xl overflow-hidden 
+              hover:scale-110 transition duration-300">
+        <img 
+          src="https://image2url.com/r2/default/images/1774902063562-a2d804d5-88bd-47e8-a39f-e79689795a6f.jpeg" 
+          class="w-full h-48 object-cover"
+        >
+        <h3 class="absolute bottom-3 left-4 text-white font-semibold">
+        <a href="https://wa.me/6281211518369?text=Saya%20ingin%20booking%20Kamar%20Type%20B%20di%20Kos%20RumahOxygen%20Wonosobo"
+           target="_blank"
+           class="mt-4 inline-flex items-center gap-4 p-[1px] rounded-lg bg-gradient-to-r from-purple-500 via-blue-500 to-brand
+                  text-white text-sm px-4 py-2 rounded-lg transition animate-gradient hover:bg-green">
+        
+          <!-- ICON WHATSAPP -->
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M20 3.5A11 11 0 005.4 19.2L4 23l3.9-1.3A11 11 0 1020 3.5zm-8 16a8.5 8.5 0 01-4.3-1.2l-.3-.2-2.3.8.8-2.2-.2-.3A8.5 8.5 0 1112 19.5zm4.7-6.3c-.3-.2-1.7-.8-2-.9s-.5-.2-.7.2-.8.9-1 1.1-.4.2-.7 0a7 7 0 01-2-1.2 7.6 7.6 0 01-1.4-1.8c-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.4.3-.6 0-.2 0-.5-.1-.7-.1-.2-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.5s-1.2 1.1-1.2 2.7 1.2 3.1 1.4 3.3c.2.2 2.4 3.7 5.9 5.2.8.3 1.4.5 1.9.6.8.1 1.5.1 2.1.1.6 0 1.7-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.1-.3-.2-.6-.4z"/>
+          </svg>
+        
+          Booking Kamar Type B
+        </a>
+        </h3>
+      </div>
+    
+      <div class="p-6">
+        <p class="text-gray-400 text-sm mb-2">
+Room 15 m persegi, AC, Workbench, Tray, bed 180x200 (King size), toilet with sink, water heater, and shower      </p>
+        </p>
+    
+        <p class="text-white-400 text-xs"> Get Promo Discount 20% off</p>
+        <p class="text-sm">
+          <span class="line-through text-red-500">Rp. 2.000.000</span>
+          <span class="text-white-400 ml-2 font-semibold">Rp. 1.600.000</span>
+        </p>
+        </div>
+    
+    </div>
+    
+    <div class="bg-[#132d3a] rounded-xl overflow-hidden hover:scale-105 transition">
+
+      <div class="relative bg-[#132d3a] rounded-xl overflow-hidden 
+              hover:scale-110 transition duration-300">
+        <img 
+          src="https://image2url.com/r2/default/images/1774897161940-71f3c144-6c39-4fd2-b348-6748ad9e8df5.png" 
+          class="w-full h-48 object-cover"
+        >
+        <div class="absolute inset-0 bg-black/20"></div>
+    
+       <h3 class="absolute bottom-3 left-4 text-white font-semibold">
+        <a href="https://wa.me/6281211518369?text=Saya%20ingin%20booking%20Kamar%20Type%20C%20di%20Kos%20RumahOxygen%20Wonosobo"
+           target="_blank"
+           class="mt-4 inline-flex items-center gap-4 p-[1px] rounded-lg bg-gradient-to-r from-purple-500 via-green-500 to-brand
+                  text-white text-sm px-4 py-2 rounded-lg transition animate-gradient hover:bg-green">
+        
+          <!-- ICON WHATSAPP -->
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M20 3.5A11 11 0 005.4 19.2L4 23l3.9-1.3A11 11 0 1020 3.5zm-8 16a8.5 8.5 0 01-4.3-1.2l-.3-.2-2.3.8.8-2.2-.2-.3A8.5 8.5 0 1112 19.5zm4.7-6.3c-.3-.2-1.7-.8-2-.9s-.5-.2-.7.2-.8.9-1 1.1-.4.2-.7 0a7 7 0 01-2-1.2 7.6 7.6 0 01-1.4-1.8c-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.4.3-.6 0-.2 0-.5-.1-.7-.1-.2-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.5s-1.2 1.1-1.2 2.7 1.2 3.1 1.4 3.3c.2.2 2.4 3.7 5.9 5.2.8.3 1.4.5 1.9.6.8.1 1.5.1 2.1.1.6 0 1.7-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.1-.3-.2-.6-.4z"/>
+          </svg>
+        
+          Booking Kamar Type C
+        </a>
+        </h3>
+      </div>
+    
+      <div class="p-6">
+        <p class="text-gray-400 text-sm mb-2">
+Room 9 m persegi, Air cooler (non ac), Workbench, Tray, bed 180x200 (King size), toilet with sink, water heater, and shower      </p>
+        </p>
+    
+        <p class="text-white-400 text-xs"> Get Promo Discount 10% off</p>
+        <p class="text-sm">
+          <span class="line-through text-red-500">Rp. 1.500.000</span>
+          <span class="text-white-400 ml-2 font-semibold">Rp. 1.350.000</span>
+        </p>
+        </div>
+    
+    </div>
+    
+    
+    <div class="bg-[#132d3a] rounded-xl overflow-hidden hover:scale-105 transition">
+
+      <div class="relative bg-[#132d3a] rounded-xl overflow-hidden 
+              hover:scale-110 transition duration-300">
+        <img 
+          src="https://image2url.com/r2/default/images/1774880292802-c1f9f5cc-e19e-455c-aa1f-e4686f48b7f3.png" 
+          class="w-full h-48 object-cover"
+        >
+        <div class="absolute inset-0 bg-black/40"></div>
+    
+        <h3 class="absolute bottom-3 left-4 text-white font-semibold">
+          Layanan Kebersihan
+        </h3>
+      </div>
+    
+      <div class="p-6">
+        <p class="text-gray-400 text-sm mb-2">
+          Nikmati kamar yang selalu bersih dan nyaman tanpa repot.
+        </p>
+    
+        <p class="text-brand text-xs"> tergantung jumlah / bulan</p>
+        <p class="text-white text-xs">Rp. 150.000 ? Rp. 250.000</p>
+      </div>
+    
+    </div>
+    
+    <div class="bg-[#132d3a] rounded-xl overflow-hidden hover:scale-105 transition">
+
+      <div class="relative bg-[#132d3a] rounded-xl overflow-hidden 
+              hover:scale-110 transition duration-300">
+        <img 
+          src="https://image2url.com/r2/default/images/1774880706481-e0cb302e-8fdb-42b6-b479-4c20fd23b7d9.png" 
+          class="w-full h-48 object-cover"
+        >
+        <div class="absolute inset-0 bg-black/40"></div>
+    
+        <h3 class="absolute bottom-3 left-4 text-white font-semibold">
+        Layanan Cuci Gosok Pakaian
+        </h3>
+      </div>
+    
+      <div class="p-6">
+        <p class="text-gray-400 text-sm mb-2">
+        Nggak sempat cuci baju? Tenang! Kami siap bantu mencuci dan menyetrika pakaianmu agar selalu rapi dan siap dipakai setiap hari.      </p>
+        </p>
+    
+        <p class="text-brand text-xs"> tergantung jumlah / bulan</p>
+        <p class="text-white text-xs">Rp. 100.000 ? Rp. 150.000</p>
+      </div>
+    
+    </div>
+    
+    <div class="bg-[#132d3a] rounded-xl overflow-hidden hover:scale-105 transition">
+
+      <div class="relative bg-[#132d3a] rounded-xl overflow-hidden 
+              hover:scale-110 transition duration-300">
+        <img 
+          src="https://image2url.com/r2/default/images/1774881607868-3b4599d8-92a3-4416-8434-f9b7924e2280.blob" 
+          class="w-full h-48 object-cover"
+        >
+        <div class="absolute inset-0 bg-black/40"></div>
+    
+        <h3 class="absolute bottom-3 left-4 text-white font-semibold">
+        Meals
+        </h3>
+      </div>
+    
+      <div class="p-6">
+        <p class="text-gray-400 text-sm mb-2">
+        Nggak perlu bingung cari makan! Tersedia paket makan harian dengan menu lezat, higienis, dan bergizi untuk menunjang aktivitasmu.      </p>
+        </p>
+    
+        <p class="text-brand text-xs"> 1/2 kali makan per hari  dalam bulan </p>
+        <p class="text-white text-xs">Rp. 600.000 ? Rp. 1.000.000</p>
+      </div>
+    
+    </div>
+
+</section>
+
+<!-- PORTFOLIO -->
+<section id="testimony" class="py-20 px-10 bg-[#0f2a36]" data-aos="fade-up">
+  <h2 class="text-3xl font-bold mb-10">Testimony</h2>
+
+  <!-- GRID 2 KOLOM -->
+  <div class="grid md:grid-cols-2 gap-6 relative z-10">
+
+    <!-- CARD 1 -->
+    <div class="bg-[#132d3a] rounded-xl overflow-hidden hover:scale-105 transition flex items-center justify-center">
+      <img 
+        src="https://image2url.com/r2/default/images/1774887303996-35144955-c793-47fa-ae66-e78f440662e1.jpg" 
+        class="w-full object-contain"
+
+      >
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="bg-[#132d3a] rounded-xl overflow-hidden hover:scale-105 transition flex items-center justify-center">
+      <img 
+        src="https://image2url.com/r2/default/images/1774889565362-b8fe6730-371e-4b9d-8b2c-ebcfeb380eb8.jpg" 
+        class="w-full object-contain"
+
+      >
+      
+    </div>
+    <!-- EDUCATION -->
+    <div class="section-bg bg-education relative z-10">
+      <h3 class="text-2xl font-semibold mb-6 text-blue-400"> TESTIMONIAL SECTION</h3>
+      <h4 class="text-2xl font-semibold mb-6 text-white-400">Kata Mereka Tentang RumahOxygen</h4>
+
+      <div class="space-y-6">
+        <div class="border-l-2 border-blue-400 pl-6">
+          <h4 class="font-semibold">? Andi, Mahasiswa</h4>
+          <p class="text-gray-400 text-sm">?Tempatnya nyaman banget, bersih, dan dekat ke kampus. Worth it banget!?
+          </p>
+        </div>
+
+        <div class="border-l-2 border-blue-400 pl-6">
+          <h4 class="font-semibold">? Danang, Karyawan</h4>
+          <p class="text-gray-400 text-sm">?Harga terjangkau dengan fasilitas lengkap, cocok buat pekerja seperti saya.?
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+<!-- CONTACT -->
+<section id="contact" class="py-20 bg-[#0f2a36] text-center" data-aos="fade-up">
+  <h2 class="text-3xl font-bold mb-6">Get Started</h2>
+  <p class="text-gray-300 mb-4">Tertarik untuk tinggal di RumahOxygen? Hubungi kami sekarang dan dapatkan promo terbaik!
+Continuous improvement</p>
+<br>
+<p>Hubungi Sekarang</p>
+  <p>Email: okkyhendra.muda2@gmail.com</p>
+  <p>Phone: 0812-1151-8369</p>
+</section>
+<br>
+<footer class="text-center py-6 text-gray-500">
+    © 2026 Kos RumahOxygen Wonosobo. All rights reserved.
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
+
+<script>
+let index = 0;
+const slider = document.getElementById("slider");
+const totalSlides = slider.children.length;
+
+function showSlide(i) {
+  index = (i + totalSlides) % totalSlides;
+  slider.style.transform = `translateX(-${index * 100}%)`;
+}
+
+function nextSlide() {
+  showSlide(index + 1);
+}
+
+function prevSlide() {
+  showSlide(index - 1);
+}
+
+// AUTO SLIDE (optional ??)
+setInterval(() => {
+  nextSlide();
+}, 3000);
+</script>
+<script>
+const btn = document.getElementById("menu-btn");
+const menu = document.getElementById("menu");
+
+btn.addEventListener("click", () => {
+  menu.classList.toggle("hidden");
+});
+</script>
+</body>
+</html>
