@@ -29,7 +29,7 @@
       z-index: 9999;
     }
   </style>
-<style>
+
 <style>
 .section-bg {
   position: relative;
@@ -75,8 +75,6 @@
 .bg-experience::before {
   background-image: url('https://image2url.com/r2/default/images/1774885102009-1e906a3a-59ba-4ff4-8998-a033710d55ee.jpeg');
 }
-
-</style>
 </style>
 <style>
 @keyframes gradientMove {
@@ -744,7 +742,6 @@ btn.addEventListener("click", () => {
   gtag('config', 'G-NW04W9CKLT');
 </script> 
 <script>
-<script>
 async function loadCounts() {
   try {
     let like = await fetch("https://api.countapi.xyz/get/rumahoxygen/like");
@@ -760,30 +757,35 @@ async function loadCounts() {
   }
 }
 
-// ✅ LIKE (FIX TANPA EVENT)
+// LIKE (1x per device)
 async function addLike() {
-  try {
-    let res = await fetch("https://api.countapi.xyz/hit/rumahoxygen/like");
-    let data = await res.json();
-    document.getElementById("likeCount").innerText = data.value;
-  } catch (err) {
-    console.log("ERROR LIKE:", err);
+  if (localStorage.getItem("liked")) {
+    alert("Kamu sudah like 👍");
+    return;
   }
+
+  let res = await fetch("https://api.countapi.xyz/hit/rumahoxygen/like");
+  let data = await res.json();
+
+  document.getElementById("likeCount").innerText = data.value;
+  localStorage.setItem("liked", "true");
 }
 
-// ✅ SUBSCRIBE
+// SUBSCRIBE (1x per device)
 async function addSubscribe() {
-  try {
-    let res = await fetch("https://api.countapi.xyz/hit/rumahoxygen/subscribe");
-    let data = await res.json();
-    document.getElementById("subCount").innerText = data.value;
-  } catch (err) {
-    console.log("ERROR SUB:", err);
+  if (localStorage.getItem("subscribed")) {
+    alert("Kamu sudah subscribe 🔔");
+    return;
   }
+
+  let res = await fetch("https://api.countapi.xyz/hit/rumahoxygen/subscribe");
+  let data = await res.json();
+
+  document.getElementById("subCount").innerText = data.value;
+  localStorage.setItem("subscribed", "true");
 }
 
-// LOAD AWAL
 loadCounts();
-</script>   
+</script>
 </body>
 </html>
