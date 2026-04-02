@@ -88,6 +88,15 @@
   background-size: 200% 200%;
   animation: gradientMove 3s linear infinite;
 }
+  
+.like { background: #fdcb6e; }
+.sub { background: #6c5ce7; color:white; }
+.wa { background: #25D366; color:white; }
+
+.counter {
+  font-size: 18px;
+  margin: 5px;
+}
 </style>
 
 </head>
@@ -229,6 +238,7 @@ animate();
                 <p class="text-2xl font-bold text-blue-400">2.5K+</p> 
                 <p class="text-sm text-gray-400">Likes on Instagram</p> 
           </div> 
+          
         </div>
         <br>
         <div class="flex gap-4">
@@ -242,6 +252,15 @@ animate();
             Contact by WA
           </a>
           </div>
+        <div class="card">
+          <h2>Dukung kami ❤️</h2>
+        
+          <button class="like" onclick="like()">👍 Like</button>
+          <div class="counter">Like: <span id="likeCount">0</span></div>
+        
+          <button class="sub" onclick="subscribe()">🔔 Subscribe</button>
+          <div class="counter">Subscriber: <span id="subCount">0</span></div>
+        </div>
       </div>
 
       <!-- IMAGE -->
@@ -717,6 +736,37 @@ btn.addEventListener("click", () => {
   gtag('js', new Date());
 
   gtag('config', 'G-NW04W9CKLT');
+</script> 
+ <script>
+async function loadCounts() {
+  try {
+    let like = await fetch("https://api.countapi.xyz/get/rumahoxygen/like");
+    let sub = await fetch("https://api.countapi.xyz/get/rumahoxygen/subscribe");
+
+    let likeData = await like.json();
+    let subData = await sub.json();
+
+    document.getElementById("likeCount").innerText = likeData.value || 0;
+    document.getElementById("subCount").innerText = subData.value || 0;
+  } catch {
+    document.getElementById("likeCount").innerText = "0";
+    document.getElementById("subCount").innerText = "0";
+  }
+}
+
+async function like() {
+  let res = await fetch("https://api.countapi.xyz/hit/rumahoxygen/like");
+  let data = await res.json();
+  document.getElementById("likeCount").innerText = data.value;
+}
+
+async function subscribe() {
+  let res = await fetch("https://api.countapi.xyz/hit/rumahoxygen/subscribe");
+  let data = await res.json();
+  document.getElementById("subCount").innerText = data.value;
+}
+
+loadCounts();
 </script>     
 </body>
 </html>
