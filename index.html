@@ -249,22 +249,8 @@ animate();
           >
             Contact by WA
           </a>
-          </div>
-        <br>
-        <div class="card">
-          
-          <h2>Dukung kami ❤️</h2>
-          <br>
-        
-          <button class="like hover:scale-110 transition" onclick="addLike()">
-            👍 Like
-          </button>
-          <div class="counter">Like: <span id="likeCount">0</span></div>
-        <button class="sub hover:scale-110 transition" onclick="addSubscribe()">
-            🔔 Subscribe
-        </button>
-          <div class="counter">Subscriber: <span id="subCount">0</span></div> </div>
         </div>
+        
       </div>
 
       <!-- IMAGE -->
@@ -277,7 +263,20 @@ animate();
       </div>
 
     </div>
-
+                <div class="card">
+                  
+                      <h2>Dukung kami ❤️</h2>
+                      <br>
+                    
+                      <button class="like text-white px-6 py-3 rounded-full font-semibold hover:scale-110 transition" onclick="addLike()">
+                        👍 Like
+                      </button>
+                      <div class="counter">Like: <span id="likeCount">0</span></div>
+                    <button class="sub text-white px-6 py-3 rounded-full font-semibold hover:scale-110 transition" onclick="addSubscribe()">
+                        🔔 Subscribe
+                    </button>
+                      <div class="counter">Subscriber: <span id="subCount">0</span></div> </div>
+                </div>
   </div>
 </section>
 
@@ -742,6 +741,7 @@ btn.addEventListener("click", () => {
   gtag('config', 'G-NW04W9CKLT');
 </script> 
 <script>
+<script>
 async function loadCounts() {
   try {
     let like = await fetch("https://api.countapi.xyz/get/rumahoxygen/like");
@@ -757,32 +757,38 @@ async function loadCounts() {
   }
 }
 
-// LIKE (1x per device)
 async function addLike() {
-  if (localStorage.getItem("liked")) {
-    alert("Kamu sudah like 👍");
-    return;
+  try {
+    if (localStorage.getItem("liked")) {
+      alert("Kamu sudah like 👍");
+      return;
+    }
+
+    let res = await fetch("https://api.countapi.xyz/hit/rumahoxygen/like");
+    let data = await res.json();
+
+    document.getElementById("likeCount").innerText = data.value;
+    localStorage.setItem("liked", "true");
+  } catch (err) {
+    console.log("LIKE ERROR:", err);
   }
-
-  let res = await fetch("https://api.countapi.xyz/hit/rumahoxygen/like");
-  let data = await res.json();
-
-  document.getElementById("likeCount").innerText = data.value;
-  localStorage.setItem("liked", "true");
 }
 
-// SUBSCRIBE (1x per device)
 async function addSubscribe() {
-  if (localStorage.getItem("subscribed")) {
-    alert("Kamu sudah subscribe 🔔");
-    return;
+  try {
+    if (localStorage.getItem("subscribed")) {
+      alert("Kamu sudah subscribe 🔔");
+      return;
+    }
+
+    let res = await fetch("https://api.countapi.xyz/hit/rumahoxygen/subscribe");
+    let data = await res.json();
+
+    document.getElementById("subCount").innerText = data.value;
+    localStorage.setItem("subscribed", "true");
+  } catch (err) {
+    console.log("SUB ERROR:", err);
   }
-
-  let res = await fetch("https://api.countapi.xyz/hit/rumahoxygen/subscribe");
-  let data = await res.json();
-
-  document.getElementById("subCount").innerText = data.value;
-  localStorage.setItem("subscribed", "true");
 }
 
 loadCounts();
