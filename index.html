@@ -255,11 +255,12 @@ animate();
         <div class="card">
           <h2>Dukung kami ❤️</h2>
         
-          <button class="like" onclick="like()">👍 Like</button>
-          <div class="counter">Like: <span id="likeCount">0</span></div>
-        
-          <button class="sub" onclick="subscribe()">🔔 Subscribe</button>
-          <div class="counter">Subscriber: <span id="subCount">0</span></div>
+          <button class="like hover:scale-110 transition" onclick="addLike()">
+            👍 Like
+          </button>
+        <button class="sub hover:scale-110 transition" onclick="addSubscribe()">
+            🔔 Subscribe
+        </button>
         </div>
       </div>
 
@@ -737,30 +738,33 @@ btn.addEventListener("click", () => {
 
   gtag('config', 'G-NW04W9CKLT');
 </script> 
- <script>
+<script>
 async function loadCounts() {
-  try {
-    let like = await fetch("https://api.countapi.xyz/get/rumahoxygen/like");
-    let sub = await fetch("https://api.countapi.xyz/get/rumahoxygen/subscribe");
+  let like = await fetch("https://api.countapi.xyz/get/rumahoxygen/like");
+  let sub = await fetch("https://api.countapi.xyz/get/rumahoxygen/subscribe");
 
-    let likeData = await like.json();
-    let subData = await sub.json();
+  let likeData = await like.json();
+  let subData = await sub.json();
 
-    document.getElementById("likeCount").innerText = likeData.value || 0;
-    document.getElementById("subCount").innerText = subData.value || 0;
-  } catch {
-    document.getElementById("likeCount").innerText = "0";
-    document.getElementById("subCount").innerText = "0";
-  }
+  document.getElementById("likeCount").innerText = likeData.value || 0;
+  document.getElementById("subCount").innerText = subData.value || 0;
 }
 
-async function like() {
+// ✅ FUNCTION BARU (PAKAI INI)
+async function addLike(event) {
+  const btn = event.target;
+  btn.disabled = true;
+
   let res = await fetch("https://api.countapi.xyz/hit/rumahoxygen/like");
   let data = await res.json();
+
   document.getElementById("likeCount").innerText = data.value;
+
+  setTimeout(() => btn.disabled = false, 1000);
 }
 
-async function subscribe() {
+// subscribe tetap
+async function addSubscribe() {
   let res = await fetch("https://api.countapi.xyz/hit/rumahoxygen/subscribe");
   let data = await res.json();
   document.getElementById("subCount").innerText = data.value;
