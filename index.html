@@ -252,8 +252,11 @@ animate();
             Contact by WA
           </a>
           </div>
+        <br>
         <div class="card">
+          
           <h2>Dukung kami ❤️</h2>
+          <br>
         
           <button class="like hover:scale-110 transition" onclick="addLike()">
             👍 Like
@@ -741,38 +744,46 @@ btn.addEventListener("click", () => {
   gtag('config', 'G-NW04W9CKLT');
 </script> 
 <script>
+<script>
 async function loadCounts() {
-  let like = await fetch("https://api.countapi.xyz/get/rumahoxygen/like");
-  let sub = await fetch("https://api.countapi.xyz/get/rumahoxygen/subscribe");
+  try {
+    let like = await fetch("https://api.countapi.xyz/get/rumahoxygen/like");
+    let sub = await fetch("https://api.countapi.xyz/get/rumahoxygen/subscribe");
 
-  let likeData = await like.json();
-  let subData = await sub.json();
+    let likeData = await like.json();
+    let subData = await sub.json();
 
-  document.getElementById("likeCount").innerText = likeData.value || 0;
-  document.getElementById("subCount").innerText = subData.value || 0;
+    document.getElementById("likeCount").innerText = likeData.value || 0;
+    document.getElementById("subCount").innerText = subData.value || 0;
+  } catch (err) {
+    console.log("ERROR LOAD:", err);
+  }
 }
 
-// ✅ FUNCTION BARU (PAKAI INI)
-async function addLike(event) {
-  const btn = event.target;
-  btn.disabled = true;
-
-  let res = await fetch("https://api.countapi.xyz/hit/rumahoxygen/like");
-  let data = await res.json();
-
-  document.getElementById("likeCount").innerText = data.value;
-
-  setTimeout(() => btn.disabled = false, 1000);
+// ✅ LIKE (FIX TANPA EVENT)
+async function addLike() {
+  try {
+    let res = await fetch("https://api.countapi.xyz/hit/rumahoxygen/like");
+    let data = await res.json();
+    document.getElementById("likeCount").innerText = data.value;
+  } catch (err) {
+    console.log("ERROR LIKE:", err);
+  }
 }
 
-// subscribe tetap
+// ✅ SUBSCRIBE
 async function addSubscribe() {
-  let res = await fetch("https://api.countapi.xyz/hit/rumahoxygen/subscribe");
-  let data = await res.json();
-  document.getElementById("subCount").innerText = data.value;
+  try {
+    let res = await fetch("https://api.countapi.xyz/hit/rumahoxygen/subscribe");
+    let data = await res.json();
+    document.getElementById("subCount").innerText = data.value;
+  } catch (err) {
+    console.log("ERROR SUB:", err);
+  }
 }
 
+// LOAD AWAL
 loadCounts();
-</script>     
+</script>   
 </body>
 </html>
