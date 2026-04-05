@@ -686,6 +686,71 @@ Room 9 m persegi, Air cooler (non ac), Workbench, Tray, bed 180x200 (King size),
     </div>
   </div>
 </section>
+<section id="lead-form" style="padding:40px 20px; background:#f5f7fb; font-family:sans-serif;">
+  <div style="max-width:700px; margin:auto; background:white; padding:25px; border-radius:12px; box-shadow:0 5px 20px rgba(0,0,0,0.1);">
+
+    <h2 style="text-align:center; md:text-6xl font-bold leading-tight mb-4"> 
+      <span class="font-bold bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent
+          [ text-shadow:
+          0_0_10px_rgba(10,162,181,0.9),
+          0_0_20px_rgba(10,162,181,0.7),
+          0_0_40px_rgba(10,162,181,0.5)
+          ]">
+          🔥Isi form untuk dapat prioritas & promo <br> 🏡Kos RumahOxygen
+      </span>
+    </h2>
+    <p style="background:#fde68a; padding:10px; border-radius:8px; text-align:center;">
+    🔥 Promo terbatas bulan ini – Sisa beberapa kamar & terbatas!
+    </p>
+    
+    <form id="bookingForm">
+      
+      <label>Nama Lengkap</label><br>
+      <input type="text" id="nama" required style="width:100%; padding:10px; margin-bottom:10px;">
+
+      <label>No WhatsApp</label><br>
+      <input type="text" id="wa" required style="width:100%; padding:10px; margin-bottom:10px;">
+
+      <label>Rencana Masuk</label><br>
+      <select id="masuk" style="width:100%; padding:10px; margin-bottom:10px;">
+        <option>Minggu ini</option>
+        <option>1-2 minggu lagi</option>
+        <option>Bulan depan</option>
+      </select>
+
+      <label>Durasi Sewa</label><br>
+      <select id="durasi" style="width:100%; padding:10px; margin-bottom:10px;">
+        <option>3 bulan</option>
+        <option>6 bulan</option>
+        <option>12 bulan</option>
+        <option>> 1 tahun</option>
+      </select>
+
+      <label>Budget</label><br>
+      <select id="budget" style="width:100%; padding:10px; margin-bottom:20px;">
+        <option>1 - 1.5 juta</option>
+        <option>1.5 - 2 juta</option>
+        <option>> 2 juta</option>
+      </select>
+      
+      <label>Kebutuhan Jumlah</label><br>
+      <select id="kebutuhan" style="width:100%; padding:10px; margin-bottom:20px;">
+        <option>1 orang (sendiri)</option>
+        <option>2 orang(sejenis)</option>
+        <option>Berkeluarga</option>
+      </select>
+
+      <button type="button" onclick="kirimWA()" 
+        style="width:100%; padding:12px; class="mt-4 inline-flex items-center gap-4 p-[1px] rounded-lg bg-gradient-to-r from-purple-500 via-red-500 to-brand
+                  text-white text-sm px-4 py-2 rounded-lg transition animate-gradient hover:bg-green">
+        📲 Kirim Eskalasi Prioritas Via WhatsApp
+      </button>
+
+    </form>
+
+  </div>
+</section>
+
 <br>
 <!-- CONTACT -->
 <section id="contact" class="py-20 bg-[#0f2a36] text-center" data-aos="fade-up">
@@ -701,7 +766,11 @@ Continuous improvement</p>
 <footer class="text-center py-6 text-gray-500">
     © 2026 Kos RumahOxygen Wonosobo. All rights reserved.
 </footer>
-
+<a href="https://wa.me/6281211518369" target="_blank"
+style="position:fixed; bottom:20px; right:20px; background:#25D366; color:white;
+padding:15px 18px; border-radius:50px; text-decoration:none; font-size:18px;">
+💬
+</a>
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script>
   AOS.init();
@@ -799,6 +868,31 @@ async function addSubscribe() {
 }
 
 loadCounts();
+</script>
+<script>
+function kirimWA() {
+  let nama = document.getElementById("nama").value;
+  let wa = document.getElementById("wa").value;
+  let masuk = document.getElementById("masuk").value;
+  let durasi = document.getElementById("durasi").value;
+  let budget = document.getElementById("budget").value;
+  let budget = document.getElementById("kebutuhan").value;
+
+
+  let pesan = `Halo, saya tertarik kos RumahOxygen:
+
+Nama         : ${nama}
+No WA        : ${wa}
+Rencana Masuk: ${masuk}
+Durasi       : ${durasi}
+Budget       : ${budget}
+Kebutuhan    : ${kebutuhan}
+
+Mohon info ketersediaan kamar dan promo menarik ya`;
+
+  let url = "https://wa.me/6281211518369?text=" + encodeURIComponent(pesan);
+  window.open(url, "_blank");
+}
 </script>
 </body>
 </html>
